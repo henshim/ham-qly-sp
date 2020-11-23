@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="text" id="product-name" placeholder="product name...">
+<button onclick="addProduct()">Add</button>
+
+<table id="list-product" border="1px"></table>
+<script>
+    let product = ['tao', 'oi', 'chuoi'];
+
+    //hiển thị sp
+    function display2() {
+        let str = '<tr>'
+            + '<th>STT</th>'
+            + '<th>Product Name</th>'
+            + '<th colspan="2">Action</th>'
+            + '</tr>';
+        for (i = 0; i < product.length; i++) {
+            str += '<tr>'
+                + '<td>' + (i + 1) + '</td>'
+                + '<td>' + product[i] + '</td>'
+                + '<td><button onclick="editProduct(' + i + ')">Edit</button></td>'
+                + '<td><button onclick="delProduct(' + i + ')">Delete</button> </td>'
+                + '</tr>';
+        }
+        document.getElementById('list-product').innerHTML = str;
+    }
+
+    // function display() {
+    //     let str = `<tr>
+    //                 <th>STT</th>
+    //                 <th>Product Name</th>
+    //                 <th colspan="2">Action</th>
+    //                </tr>`;
+    //     for (let i = 0; i < products.length; i++) {
+    //         str += `<tr>
+    //                     <td>${i + 1}</td>
+    //                     <td>${products[i]}</td>
+    //                     <td><button onclick="editProduct(${i})">Edit</button></td>
+    //                     <td><button onclick="delProduct(${i})">Delete</button></td>
+    //                 </tr>`;
+    //     }
+    //     document.getElementById('list-product').innerHTML = str;
+    // }
+
+    //thêm sp
+    function addProduct() {
+        let nameInput = document.getElementById('product-name');
+        if (nameInput.value == '') {
+            alert('Vui lòng nhập tên sản phẩm!');
+        } else {
+            let products = nameInput.value;
+            product.push(products);
+            clearInput();
+            display2();
+        }
+    }
+
+    //xóa sp
+    function delProduct(inđex) {
+        product.splice(inđex, 1);
+        display2();
+    }
+
+    //sửa sp
+    function editProduct(index) {
+        let newName = prompt('Nhập tên mới của sản phẩm');
+        product[index] = newName;
+        display2();
+    }
+
+    //reset input
+    function clearInput() {
+        document.getElementById('product-name').value = '';
+    }
+
+    display2();
+</script>
+</body>
+</html>
